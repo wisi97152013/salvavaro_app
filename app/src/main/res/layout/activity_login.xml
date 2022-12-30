@@ -79,7 +79,7 @@
         android:textSize="14sp"
         android:textAlignment="center"
         android:id="@+id/signupText"
-        android:textColor="@color/purple_500"
+        android:textColor="@color/purple_500"/>
 
 
 
