@@ -1,5 +1,6 @@
 package com.example.milestoneapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -27,10 +28,36 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
 
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { MainActivity.this.onLoginClicked();
+
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.this.onRegisterClicked();
+            }
+        });
 
 
 
 
 
+
+    }
+
+    private void onRegisterClicked() {
+        startRegisterActivity();
+    }
+
+private void startRegisterActivity(){
+    Intent intent= new Intent(this, RegisterActivity.class);
+    startActivity(intent);
+}
+
+    private void onLoginClicked() {
     }
 }
