@@ -10,12 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.http.RegisterHttpCallback;
 import com.example.http.RegisterHttpClient;
+import com.example.model.Usuario;
 
 public class RegisterActivity extends AppCompatActivity {
 
 
     EditText name;
-    EditText apellido;
+
     EditText email;
     EditText password;
 
@@ -27,23 +28,27 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         name = findViewById(R.id.name);
-        apellido = findViewById(R.id.apellido);
         password = findViewById(R.id.password);
         email = findViewById(R.id.correo);
+
+
 
         registerButton = findViewById(R.id.registerButton);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RegisterActivity.this.onRegisteredClicked();
+                Usuario user=new Usuario(name.getText().toString(), password.getText().toString(), email.getText().toString());
+                RegisterActivity.this.onRegisteredClicked(user);
             }
         });
 
 
     }
 
-    private void onRegisteredClicked() {
+    private void onRegisteredClicked( Usuario user) {
+
+
         RegisterHttpClient.INSTANCE.registrarUsuario(new RegisterHttpCallback() {
             @Override
             public void onSuccess() {
@@ -56,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                 runOnUiThread(() -> showErrorDialog("MAL"));
 
             }
-        });
+        }, user);
 
 
     }

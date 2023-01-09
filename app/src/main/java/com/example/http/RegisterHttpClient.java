@@ -2,6 +2,7 @@ package com.example.http;
 
 import android.util.Log;
 
+import com.example.model.Usuario;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -23,16 +24,18 @@ public class RegisterHttpClient {
     private Executor executor;
     private OkHttpClient client;
     private Gson gson;
+    private Usuario usuario_temp;
 
-    private static final String REGISTRAR_URL = "https://springgcp-373701.ue.r.appspot.com/api/usuarios";
+    private static final String REGISTRAR_URL = "https://salvavaro.uk.r.appspot.com/api/usuarios";
 
     private RegisterHttpClient() {
         executor = Executors.newFixedThreadPool(4);
         client = new OkHttpClient();
         gson = new Gson();
+
     }
 
-    public void registrarUsuario(RegisterHttpCallback callback) {
+    public void registrarUsuario(RegisterHttpCallback callback, Usuario usuario_temp) {
 
         RequestBody formBody = new FormBody.Builder()
                 .add("nombre", "bernabeu")
@@ -42,7 +45,11 @@ public class RegisterHttpClient {
                 .add("rol", "fancy")
                 .build();
 
-        String jjson = "{\"nombre\":\"Luzmaria\",\"apellido\":\"Almita\",\"correo\":\"corruu@hotmail.com\",\"password\":\"contrita\",\"rol\":\"rol\"}";
+        String name=usuario_temp.getNombre().toString();
+        String correo=usuario_temp.getCorreo().toString();
+        String password=usuario_temp.getPassword().toString();
+
+        String jjson = "{\"nombre\":\""+name+"\",\"correo\":\""+correo+"\",\"password\":\""+password+"\"}";
 
         RequestBody otroBody=RequestBody.create(MediaType.parse("application/json"), jjson);
 
