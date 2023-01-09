@@ -52,13 +52,13 @@ public class RegisterActivity extends AppCompatActivity {
         RegisterHttpClient.INSTANCE.registrarUsuario(new RegisterHttpCallback() {
             @Override
             public void onSuccess() {
-                runOnUiThread(() -> showErrorDialog("BIEEEN"));
+                runOnUiThread(() -> showErrorDialog("Registro exitoso", "El usuario se ha creado exitosamente"));
 
             }
 
             @Override
             public void onError() {
-                runOnUiThread(() -> showErrorDialog("MAL"));
+                runOnUiThread(() -> showErrorDialog("Registro fallido", "Revisar los campos"));
 
             }
         }, user);
@@ -66,10 +66,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void showErrorDialog(String err) {
+    private void showErrorDialog(String titulo, String mensaje) {
         new AlertDialog.Builder(this)
-                .setTitle("Login Failed")
-                .setMessage(err)
+                .setTitle(titulo)
+                .setMessage(mensaje)
                 .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                 .show();
     }

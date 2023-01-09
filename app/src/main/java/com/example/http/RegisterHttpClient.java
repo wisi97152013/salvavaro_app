@@ -37,13 +37,7 @@ public class RegisterHttpClient {
 
     public void registrarUsuario(RegisterHttpCallback callback, Usuario usuario_temp) {
 
-        RequestBody formBody = new FormBody.Builder()
-                .add("nombre", "bernabeu")
-                .add("apellido", "panda")
-                .add("correo", "corruu@hotmail.com")
-                .add("password", "contrita")
-                .add("rol", "fancy")
-                .build();
+
 
         String name=usuario_temp.getNombre().toString();
         String correo=usuario_temp.getCorreo().toString();
@@ -65,6 +59,7 @@ public class RegisterHttpClient {
 
                 if (response.code() == 200) {
                     callback.onSuccess();
+                    return;
 
                 }
 
